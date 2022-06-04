@@ -3,6 +3,7 @@ package com.olimpiadas.api.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -54,10 +55,12 @@ public class SvcDisciplinaImp implements SvcDisciplina {
 			if(disciplinaSaved.getStatus() == 0)
 				throw new ApiException(HttpStatus.BAD_REQUEST, "disciplina isn't active");
 			else {
-				disciplinaSaved = (Disciplina) repo.findByDisciplina(disciplina.getDisciplina());
-				if(disciplinaSaved != null)
-					throw new ApiException(HttpStatus.BAD_REQUEST, "disciplina already exist");
-				repo.updateDisciplina(disciplina_id, disciplina.getDisciplina(), disciplina.getDescripcion());
+				try {
+					repo.updateDisciplina(disciplina_id, disciplina.getDisciplina(), disciplina.getDescripcion());
+				}catch(DataIntegrityViolationException e) {
+					if(e.getLocalizedMessage().contains("disciplina"))
+						throw new ApiException(HttpStatus.BAD_REQUEST, "disciplina already exist");
+				}
 				return new ApiResponse("disciplina updated");
 			}
 		}

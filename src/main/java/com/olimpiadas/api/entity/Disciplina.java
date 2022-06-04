@@ -38,8 +38,6 @@ public class Disciplina {
 	@JsonIgnore
 	private Integer status;
 
-	public Disciplina() {}
-
 	public Integer getDisciplina_id() {
 		return disciplina_id;
 	}
