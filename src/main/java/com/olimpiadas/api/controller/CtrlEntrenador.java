@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.olimpiadas.api.dto.ApiResponse;
+import com.olimpiadas.api.dto.DtoCompetidorList;
 import com.olimpiadas.api.dto.DtoEntrenadorList;
+import com.olimpiadas.api.entity.Calificacion;
 import com.olimpiadas.api.entity.Disciplina;
 import com.olimpiadas.api.entity.Entrenador;
+import com.olimpiadas.api.service.SvcCalificacion;
 import com.olimpiadas.api.service.SvcEntrenador;
 import com.olimpiadas.exception.ApiException;
 
@@ -31,9 +34,22 @@ public class CtrlEntrenador {
 	@Autowired
 	SvcEntrenador svc;
 	
+	@Autowired
+	SvcCalificacion svcCal;
+	
 	@GetMapping
 	public ResponseEntity<List<DtoEntrenadorList>> getEntrenadores(){
 		return new ResponseEntity<>(svc.getEntrenadores(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{entrenador_id}/competidor")
+	public ResponseEntity<List<DtoCompetidorList>> getCompetidores(@PathVariable("entrenador_id") Integer entrenador_id){
+		return new ResponseEntity<>(svc.getCompetidores(entrenador_id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{rfc_juez}/{rfc_competidor}/calificacion")
+	public ResponseEntity<Calificacion> getCalificacion(@PathVariable("rfc_juez") String rfc_juez, @PathVariable("rfc_competidor") String rfc_competidor){
+		return new ResponseEntity<>(svcCal.getCalificacion(rfc_juez, rfc_competidor), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{rfc}")

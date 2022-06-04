@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.olimpiadas.api.dto.ApiResponse;
+import com.olimpiadas.api.dto.DtoCompetidorList;
 import com.olimpiadas.api.dto.DtoEntrenadorList;
 import com.olimpiadas.api.entity.Disciplina;
 import com.olimpiadas.api.entity.Entrenador;
@@ -27,6 +28,11 @@ public class SvcEntrenadorImp implements SvcEntrenador {
 	@Override
 	public List<DtoEntrenadorList> getEntrenadores() {
 		return repoEntrenadorList.findByStatus(1);
+	}
+
+	@Override
+	public List<DtoCompetidorList> getCompetidores(Integer entrenador_id) {
+		return repoEntrenadorList.getCompetidores(entrenador_id, 1);
 	}
 
 	@Override

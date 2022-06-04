@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.olimpiadas.api.dto.ApiResponse;
 import com.olimpiadas.api.dto.DtoCompetidorList;
+import com.olimpiadas.api.entity.Calificacion;
 import com.olimpiadas.api.entity.Competidor;
 import com.olimpiadas.api.entity.Disciplina;
 import com.olimpiadas.api.entity.Entrenador;
+import com.olimpiadas.api.service.SvcCalificacion;
 import com.olimpiadas.api.service.SvcCompetidor;
 import com.olimpiadas.exception.ApiException;
 
@@ -32,6 +34,9 @@ public class CtrlCompetidor {
 	@Autowired
 	SvcCompetidor svc;
 	
+	@Autowired
+	SvcCalificacion svcCal;
+	
 	@GetMapping
 	public ResponseEntity<List<DtoCompetidorList>> getCompetidores(){
 		return new ResponseEntity<>(svc.getCompetidores(), HttpStatus.OK);
@@ -40,6 +45,11 @@ public class CtrlCompetidor {
 	@GetMapping("/{rfc}")
 	public ResponseEntity<Competidor> getCompetidor(@PathVariable("rfc") String rfc){
 		return new ResponseEntity<>(svc.getCompetidor(rfc), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{rfc}/calificacion")
+	public ResponseEntity<List<Calificacion>> getCalificacion(@PathVariable("rfc") String rfc){
+		return new ResponseEntity<>(svcCal.getCalificaciones(rfc), HttpStatus.OK);
 	}
 	
 	@PostMapping
