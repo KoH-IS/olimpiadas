@@ -31,6 +31,16 @@ public class SvcCompetidorImp implements SvcCompetidor {
 	}
 
 	@Override
+	public List<DtoCompetidorList> getCompetidores(Integer disciplina_id) {
+		return repoCompList.findByDisciplina(disciplina_id, 1);
+	}
+
+	@Override
+	public List<DtoCompetidorList> getCompetidoresEntrenador(Integer entrenador_id) {
+		return repoCompList.findByEntrenador(entrenador_id, 1);
+	}
+
+	@Override
 	public Competidor getCompetidor(String rfc) {
 		Competidor competidor = repo.findByRfcAndStatus(rfc, 1);
 		if(competidor != null)
@@ -85,7 +95,7 @@ public class SvcCompetidorImp implements SvcCompetidor {
 	@Override
 	public ApiResponse updateCompetidorDisciplina(Integer id, Disciplina disciplina) {
 		try {
-			if(repo.updateCompetidorDisciplina(id, disciplina.getDisciplina_id()) > 0)
+			if(repo.updateCompetidorDisciplina(id,disciplina.getDisciplina_id()) > 0)
 				return new ApiResponse("competidor disciplina updated");
 			else
 				throw new ApiException(HttpStatus.BAD_REQUEST, "competidor disciplina cannot be updated");

@@ -31,6 +31,11 @@ public class SvcEntrenadorImp implements SvcEntrenador {
 	}
 
 	@Override
+	public List<DtoEntrenadorList> getEntrenadores(Integer disciplina_id) {
+		return repoEntrenadorList.findByDisciplina(disciplina_id, 1);
+	}
+
+	@Override
 	public List<DtoCompetidorList> getCompetidores(Integer entrenador_id) {
 		return repoEntrenadorList.getCompetidores(entrenador_id, 1);
 	}

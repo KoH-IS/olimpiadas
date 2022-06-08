@@ -30,6 +30,11 @@ public class SvcJuezImp implements SvcJuez {
 	}
 
 	@Override
+	public List<DtoJuezList> getJueces(Integer disciplina_id) {
+		return repoJuezList.findByDisciplina(disciplina_id, 1);
+	}
+
+	@Override
 	public Juez getJuez(String rfc) {
 		Juez juez = repo.findByRfcAndStatus(rfc, 1);
 		if(juez != null)

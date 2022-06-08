@@ -42,6 +42,11 @@ public class CtrlEntrenador {
 		return new ResponseEntity<>(svc.getEntrenadores(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/{disciplina_id}/disciplina")
+	public ResponseEntity<List<DtoEntrenadorList>> getEntrenadores(@PathVariable("disciplina_id") Integer disciplina_id){
+		return new ResponseEntity<>(svc.getEntrenadores(disciplina_id), HttpStatus.OK);
+	}
+	
 	@GetMapping("/{entrenador_id}/competidor")
 	public ResponseEntity<List<DtoCompetidorList>> getCompetidores(@PathVariable("entrenador_id") Integer entrenador_id){
 		return new ResponseEntity<>(svc.getCompetidores(entrenador_id), HttpStatus.OK);

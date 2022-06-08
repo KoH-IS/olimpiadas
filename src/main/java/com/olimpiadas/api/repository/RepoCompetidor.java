@@ -46,7 +46,7 @@ public interface RepoCompetidor extends JpaRepository<Competidor, Integer> {
 	@Modifying
 	@Transactional
 	@Query(value = "UPDATE competidor SET disciplina_id = :disciplina_id WHERE competidor_id = :competidor_id AND status = 1", nativeQuery = true)
-	Integer updateCompetidorDisciplina(@Param("competidor_id") Integer competidor_id, @Param("disciplina_id") Integer disciplina_id);
+	Integer updateCompetidorDisciplina(@Param("competidor_id") Integer competidor_id,  @Param("disciplina_id") Integer disciplina_id);
 	
 	@Modifying
 	@Transactional

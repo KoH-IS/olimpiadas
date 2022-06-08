@@ -36,6 +36,11 @@ public class CtrlJuez {
 		return new ResponseEntity<>(svc.getJueces(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/{disciplina_id}/disciplina")
+	public ResponseEntity<List<DtoJuezList>> getJuez(@PathVariable("disciplina_id") Integer disciplina_id){
+		return new ResponseEntity<>(svc.getJueces(disciplina_id), HttpStatus.OK);
+	}
+	
 	@GetMapping("/{rfc}")
 	public ResponseEntity<Juez> getJuez(@PathVariable("rfc") String rfc){
 		return new ResponseEntity<>(svc.getJuez(rfc), HttpStatus.OK);

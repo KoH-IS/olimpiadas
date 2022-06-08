@@ -15,6 +15,9 @@ public interface RepoEntrenadorList extends JpaRepository<DtoEntrenadorList, Int
 
 	List<DtoEntrenadorList> findByStatus(Integer status);
 	
+	@Query(value = "SELECT * FROM entrenador WHERE disciplina_id = :disciplina_id AND status = :status", nativeQuery = true)
+	List<DtoEntrenadorList> findByDisciplina(@Param("disciplina_id") Integer disciplina_id, @Param("status") Integer status);
+	
 	@Query(value = "SELECT * FROM competidor WHERE entrenador_id = :entrenador_id AND status = :status", nativeQuery = true)
 	List<DtoCompetidorList> getCompetidores(@Param("entrenador_id") Integer entrenador_id, @Param("status") Integer status);
 }

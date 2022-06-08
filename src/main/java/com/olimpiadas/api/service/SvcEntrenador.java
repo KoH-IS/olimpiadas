@@ -11,6 +11,7 @@ import com.olimpiadas.api.entity.Entrenador;
 public interface SvcEntrenador {
 	
 	public List<DtoEntrenadorList> getEntrenadores();
+	public List<DtoEntrenadorList> getEntrenadores(Integer disciplina_id);
 	public List<DtoCompetidorList> getCompetidores(Integer entrenador_id);
 	public Entrenador getEntrenador(String rfc);
 	public ApiResponse createEntrenador(Entrenador in);
